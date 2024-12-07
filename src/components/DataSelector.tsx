@@ -1,4 +1,4 @@
-import React from "react";
+import toast from "react-hot-toast";
 import { DataType } from "../types";
 import { FileText, MessageSquare } from "lucide-react";
 
@@ -11,7 +11,9 @@ export function DataSelector({ value, onChange }: DataSelectorProps) {
   return (
     <div className="flex space-x-2">
       <button
-        onClick={() => onChange("posts")}
+        onClick={() => {
+          onChange("posts"), toast.success("Successfully toasted!");
+        }}
         className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors duration-200 ${
           value === "posts"
             ? "bg-blue-500 text-white"

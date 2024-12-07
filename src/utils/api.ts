@@ -1,4 +1,4 @@
-import { Post, Comment, DataType, DataRecord } from "../types";
+import { DataType, DataRecord } from "../types";
 
 const API_BASE_URL = "https://jsonplaceholder.typicode.com";
 
