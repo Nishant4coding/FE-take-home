@@ -7,6 +7,7 @@ import { LoadingSpinner } from "./components/Spinner";
 import { fetchData, downloadData } from "./utils/api";
 import { DataType, DataRecord } from "./types";
 import { ITEMS_PER_PAGE, COLUMNS } from "./constants/table";
+import { Toaster } from "react-hot-toast";
 
 export default function App() {
   const [dataType, setDataType] = useState<DataType>("posts");
@@ -93,6 +94,7 @@ export default function App() {
           </div>
         </div>
       </div>
+      <Toaster />
     </div>
   );
 }

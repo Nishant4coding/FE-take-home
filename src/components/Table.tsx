@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import { Column, DataRecord, Post, Comment } from "../types";
 
 interface TableProps {
@@ -17,8 +17,13 @@ export function Table({
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentData = data.slice(startIndex, endIndex);
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   const truncateText = (text: string, maxLength: number) => {
+    console.log(text);
+    console.log(currentData);
     return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
   };
 
