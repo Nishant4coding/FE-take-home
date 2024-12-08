@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { Column, DataRecord, Post, Comment } from "../types";
+import React from "react";
+import { Column, DataRecord } from "../types";
 
 interface TableProps {
   data: DataRecord[];
@@ -17,36 +17,36 @@ export function Table({
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentData = data.slice(startIndex, endIndex);
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
 
-  const truncateText = (text: string, maxLength: number) => {
-    console.log(text);
-    console.log(currentData);
-    return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
+  const truncateText = (value: unknown, maxLength: number): string => {
+    if (typeof value !== "string") return String(value);
+    return value.length > maxLength ? value.slice(0, maxLength) + "..." : value;
   };
 
-  const renderCell = (value: any, columnKey: keyof (Post & Comment)) => {
-    if (columnKey === "email") {
-      return (
-        <a
-          href={`mailto:${value}`}
-          className="text-blue-600 hover:text-blue-800 hover:underline"
-        >
-          {value}
-        </a>
-      );
+  const renderCell = (item: DataRecord, column: Column) => {
+    const value: unknown = item[column.key as keyof DataRecord] || "";
+
+    switch (column.key) {
+      case "email":
+        return (
+          <a
+            href={`mailto:${value}`}
+            className="text-blue-600 hover:text-blue-800 hover:underline"
+          >
+            {truncateText(value, 60)}
+          </a>
+        );
+      case "body":
+        return <p className="text-gray-600">{truncateText(value, 100)}</p>;
+      case "title":
+        return (
+          <p className="font-medium text-gray-900">{truncateText(value, 90)}</p>
+        );
+      default:
+        return (
+          <span className="text-gray-900"> {truncateText(value, 60)}</span>
+        );
     }
-    if (columnKey === "body") {
-      return <p className="text-gray-600">{truncateText(value, 100)}</p>;
-    }
-    if (columnKey === "title") {
-      return (
-        <p className="font-medium text-gray-900">{truncateText(value, 60)}</p>
-      );
-    }
-    return <span className="text-gray-900">{value}</span>;
   };
 
   return (
@@ -56,10 +56,7 @@ export function Table({
           <thead className="bg-gray-50">
             <tr>
               {columns.map((column) => (
-                <th
-                  key={column.key as string}
-                  className="group px-6 py-3 text-left"
-                >
+                <th key={column.key} className="group px-6 py-3 text-left">
                   <div className="flex items-center space-x-2">
                     <span className="text-xs font-semibold uppercase tracking-wider text-gray-600">
                       {column.header}
@@ -75,17 +72,11 @@ export function Table({
                 key={index}
                 className="hover:bg-blue-50 transition-colors duration-150"
               >
-                {columns.map((column) => {
-                  const value = item[column.key as keyof DataRecord];
-                  return (
-                    <td
-                      key={column.key as string}
-                      className="px-6 py-4 text-sm"
-                    >
-                      {renderCell(value, column.key)}
-                    </td>
-                  );
-                })}
+                {columns.map((column) => (
+                  <td key={column.key} className="px-6 py-4 text-sm">
+                    {renderCell(item, column)}
+                  </td>
+                ))}
               </tr>
             ))}
           </tbody>
