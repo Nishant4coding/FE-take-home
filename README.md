@@ -37,12 +37,3 @@ Forked repository link:
 2. The application is entirely frontend-based, with no backend dependencies.  
 
 ---
-
-## Installation and Setup  
-
-Follow these steps to run the project locally:  
-
-1. **Clone the Repository**  
-   ```bash
-   git clone https://github.com/Nishant4coding/FE-take-home.git
-```
