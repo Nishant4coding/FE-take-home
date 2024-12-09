@@ -75,7 +75,7 @@ export function Table({
                 {columns.map((column) => (
                   <td
                     key={column.key}
-                    className="lg:px-6 px-4 lg:py-4 py-2 lg:text-sm text-md"
+                    className="lg:px-6 px-2 lg:py-4 py-2 text-sm text-center lg:text-left"
                   >
                     {renderCell(item, column)}
                   </td>

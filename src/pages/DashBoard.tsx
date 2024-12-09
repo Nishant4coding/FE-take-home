@@ -45,7 +45,7 @@ export default function Dashboard() {
       <div className="mx-auto lg:px-6 px-2">
         <div className="bg-white rounded-2xl shadow-2xl lg:p-8 p-2 space-y-6">
           {/* Header Section */}
-          <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center border-b pb-6 gap-4 lg:gap-0 px-4 lg:px-0">
+          <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center border-b pb-6 gap-4 lg:gap-0 px-2 lg:px-0">
             <div className="flex lg:flex-row flex-col items-center space-x-3">
               <Database className="w-10 h-10 text-blue-500" />
               <h1 className="lg:text-4xl text-3xl text-center lg:text-left font-extrabold text-gray-800">
@@ -56,7 +56,7 @@ export default function Dashboard() {
           </div>
 
           {/* Content Section */}
-          <div className="bg-gray-50 rounded-xl p-6">
+          <div className="bg-gray-50 rounded-xl lg:p-6 p-2">
             <div className="text-gray-600 text-lg mb-4">
               Viewing <strong className="text-blue-600">{dataType}</strong> data
               • <span className="font-semibold">{data.length}</span> total
@@ -84,7 +84,7 @@ export default function Dashboard() {
                 <div className="mt-6 flex flex-col lg:flex-row lg:justify-between items-center gap-6">
                   <button
                     onClick={handleDownload}
-                    className="flex items-center gap-3 px-6 py-3 bg-blue-600 text-white font-semibold text-lg rounded-lg hover:bg-blue-700 shadow-lg transform hover:scale-105 transition"
+                    className="flex items-center gap-3 px-6 py-3 bg-blue-600 text-white font-semibold lg:text-lg text-sm rounded-lg hover:bg-blue-700 shadow-lg transform hover:scale-105 transition"
                   >
                     <Download className="w-5 h-5" />
                     Download {dataType}
