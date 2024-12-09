@@ -1,7 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Database, ArrowRight, BarChart2, Users, Search } from "lucide-react";
+import { fetchData } from "../utils/api";
+import { DataRecord } from "../types";
 
 function Home() {
+  const [postCount, setPostCount] = useState<number | null>(null);
+  const [commentCount, setCommentCount] = useState<number | null>(null);
+
+  useEffect(() => {
+    const fetchCounts = async () => {
+      try {
+        const posts = await fetchData("posts");
+        const comments = await fetchData("comments");
+
+        setPostCount(posts.length);
+        setCommentCount(comments.length);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setPostCount(0);
+        setCommentCount(0);
+      }
+    };
+
+    fetchCounts();
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
       {/* Hero Section */}
@@ -26,66 +49,24 @@ function Home() {
           </button>
         </div>
 
-        {/* Features Grid */}
-        <div className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-200">
-            <div className="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-lg mb-4">
-              <BarChart2 className="w-6 h-6 text-blue-600" />
-            </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">
-              Data Visualization
-            </h3>
-            <p className="text-gray-600">
-              View your data in a clean, organized table format with sorting and
-              filtering capabilities.
-            </p>
-          </div>
-
-          <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-200">
-            <div className="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-lg mb-4">
-              <Users className="w-6 h-6 text-blue-600" />
-            </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">
-              User Management
-            </h3>
-            <p className="text-gray-600">
-              Access and manage posts and comments from all users in one
-              centralized location.
-            </p>
-          </div>
-
-          <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-200">
-            <div className="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-lg mb-4">
-              <Search className="w-6 h-6 text-blue-600" />
-            </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">
-              Quick Search
-            </h3>
-            <p className="text-gray-600">
-              Easily find specific posts or comments with our powerful search
-              functionality.
-            </p>
-          </div>
-        </div>
-
         {/* Stats Section */}
         <div className="mt-24 bg-white rounded-xl shadow-lg p-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="text-center">
-              <div className="text-3xl font-bold text-blue-600 mb-2">100+</div>
+              <div className="text-3xl font-bold text-blue-600 mb-2">
+                {postCount !== null ? postCount : "Loading..."}
+              </div>
               <div className="text-gray-600">Posts Available</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-blue-600 mb-2">500+</div>
+              <div className="text-3xl font-bold text-blue-600 mb-2">
+                {commentCount !== null ? commentCount : "Loading..."}
+              </div>
               <div className="text-gray-600">Comments</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-blue-600 mb-2">10+</div>
+              <div className="text-3xl font-bold text-blue-600 mb-2">10</div>
               <div className="text-gray-600">Users</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-blue-600 mb-2">99.9%</div>
-              <div className="text-gray-600">Uptime</div>
             </div>
           </div>
         </div>

@@ -13,7 +13,7 @@ export function Pagination({
   onPageChange,
 }: PaginationProps) {
   const getVisiblePages = () => {
-    const delta = 2;
+    const delta = 1;
     const range = [];
     const rangeWithDots: (string | number)[] = [];
     let l: number;

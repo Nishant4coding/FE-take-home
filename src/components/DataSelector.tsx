@@ -12,11 +12,11 @@ export function DataSelector({ value, onChange }: DataSelectorProps) {
   return (
     <>
       <Toaster />
-      <div className="flex space-x-2">
+      <div className="flex justify-between lg:w-auto w-full lg:space-x-2">
         <button
           onClick={() => {
             onChange("posts");
-            toast.success("Successfully toasted!");
+            toast.success("Swiched to posts!");
           }}
           className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors duration-200 ${
             value === "posts"
@@ -30,7 +30,7 @@ export function DataSelector({ value, onChange }: DataSelectorProps) {
         <button
           onClick={() => {
             onChange("comments");
-            toast.success("Successfully toasted!");
+            toast.success("Swiched to comments!");
           }}
           className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors duration-200 ${
             value === "comments"
