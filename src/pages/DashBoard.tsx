@@ -1,6 +1,7 @@
-import { Database, Download } from "lucide-react";
+import { Database, Download, Home } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import { DataSelector } from "../components/DataSelector";
 import { Pagination } from "../components/Pagination";
 import { LoadingSpinner } from "../components/Spinner";
@@ -15,7 +16,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [error, setError] = useState<string | null>(null);
-
+  const navigator = useNavigate();
   useEffect(() => {
     async function loadData() {
       try {
@@ -46,6 +47,15 @@ export default function Dashboard() {
         <div className="bg-white rounded-2xl shadow-2xl lg:p-8 p-2 space-y-6">
           {/* Header Section */}
           <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center border-b pb-6 gap-4 lg:gap-0 px-2 lg:px-0">
+            {/* Back to Home Icon */}
+            <button
+              onClick={() => navigator("/")} // Navigate to the home page
+              className="flex items-center gap-2 text-gray-600 hover:text-gray-800 transition"
+            >
+              <Home className="w-6 h-6" />
+              <span className="font-medium text-lg">Home</span>
+            </button>
+
             <div className="flex lg:flex-row flex-col items-center space-x-3">
               <Database className="w-10 h-10 text-blue-500" />
               <h1 className="lg:text-4xl text-3xl text-center lg:text-left font-extrabold text-gray-800">
