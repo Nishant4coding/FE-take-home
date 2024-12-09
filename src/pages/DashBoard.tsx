@@ -7,7 +7,7 @@ import { LoadingSpinner } from "../components/Spinner";
 import { Table } from "../components/Table";
 import { COLUMNS, ITEMS_PER_PAGE } from "../constants/table";
 import { DataRecord, DataType } from "../types";
-import { downloadData, fetchData } from "../utils/api";
+import { downloadDataAsCSV, fetchData } from "../utils/api";
 
 export default function Dashboard() {
   const [dataType, setDataType] = useState<DataType>("posts");
@@ -37,7 +37,7 @@ export default function Dashboard() {
   const totalPages = Math.ceil(data.length / ITEMS_PER_PAGE);
 
   const handleDownload = () => {
-    downloadData(data, `${dataType}.json`);
+    downloadDataAsCSV(data, `${dataType}.csv`);
   };
 
   return (

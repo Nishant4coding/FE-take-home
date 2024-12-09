@@ -10,10 +10,17 @@ export async function fetchData(type: DataType): Promise<DataRecord[]> {
   return response.json();
 }
 
-export function downloadData(data: DataRecord[], filename: string) {
-  const blob = new Blob([JSON.stringify(data, null, 2)], {
-    type: "application/json",
-  });
+export function downloadDataAsCSV(data: DataRecord[], filename: string) {
+  const headers = Object.keys(data[0]).join(",");
+  const rows = data.map((row) =>
+    Object.values(row)
+      .map((value) => `"${value}"`)
+      .join(",")
+  );
+
+  const csvContent = [headers, ...rows].join("\n");
+
+  const blob = new Blob([csvContent], { type: "text/csv" });
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;
