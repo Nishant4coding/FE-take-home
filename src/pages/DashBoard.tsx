@@ -41,32 +41,38 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-8">
-      <div className=" mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-xl shadow-xl p-6 space-y-6">
-          <div className="flex lg:flex-row flex-col lg:gap-0 gap-5 justify-between items-center border-b border-gray-200 pb-6">
-            <div className="flex items-center space-x-3">
-              <Database className="w-8 h-8 text-blue-500" />
-              <h1 className="text-3xl font-bold text-gray-900">
-                Data Explorer
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 via-gray-100 to-gray-200 py-10">
+      <div className="mx-auto px-6 sm:px-8">
+        <div className="bg-white rounded-2xl shadow-2xl p-8 space-y-6">
+          {/* Header Section */}
+          <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center border-b pb-6 gap-4 lg:gap-0">
+            <div className="flex lg:flex-row flex-col items-center space-x-3">
+              <Database className="w-10 h-10 text-blue-500" />
+              <h1 className="lg:text-4xl text-3xl text-center lg:text-left font-extrabold text-gray-800">
+                Data Explorer Dashboard
               </h1>
             </div>
             <DataSelector value={dataType} onChange={setDataType} />
           </div>
 
-          <div className="bg-gray-50 rounded-lg p-4">
-            <div className="text-sm text-gray-600 mb-2">
-              Viewing {dataType} data • {data.length} total records
+          {/* Content Section */}
+          <div className="bg-gray-50 rounded-xl p-6">
+            <div className="text-gray-600 text-lg mb-4">
+              Viewing <strong className="text-blue-600">{dataType}</strong> data
+              • <span className="font-semibold">{data.length}</span> total
+              records
             </div>
 
+            {/* Error or Loading State */}
             {error ? (
-              <div className="bg-red-50 text-red-600 rounded-lg p-4 text-center">
+              <div className="bg-red-100 text-red-600 rounded-lg p-4 text-center">
                 {error}
               </div>
             ) : loading ? (
               <LoadingSpinner />
             ) : (
               <>
+                {/* Table */}
                 <Table
                   data={data}
                   columns={COLUMNS[dataType]}
@@ -74,15 +80,15 @@ export default function Dashboard() {
                   itemsPerPage={ITEMS_PER_PAGE}
                 />
 
-                <div className="mt-6 flex lg:flex-row flex-col lg:gap-0 gap-5 justify-between items-center">
+                {/* Actions and Pagination */}
+                <div className="mt-6 flex flex-col lg:flex-row lg:justify-between items-center gap-6">
                   <button
                     onClick={handleDownload}
-                    className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200 shadow-sm hover:shadow-md"
+                    className="flex items-center gap-3 px-6 py-3 bg-blue-600 text-white font-semibold text-lg rounded-lg hover:bg-blue-700 shadow-lg transform hover:scale-105 transition"
                   >
-                    <Download className="w-4 h-4" />
+                    <Download className="w-5 h-5" />
                     Download {dataType}
                   </button>
-
                   <Pagination
                     currentPage={currentPage}
                     totalPages={totalPages}

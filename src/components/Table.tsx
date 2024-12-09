@@ -73,7 +73,10 @@ export function Table({
                 className="hover:bg-blue-50 transition-colors duration-150"
               >
                 {columns.map((column) => (
-                  <td key={column.key} className="lg:px-6 px-4 lg:py-4 py-2 lg:text-sm text-md">
+                  <td
+                    key={column.key}
+                    className="lg:px-6 px-4 lg:py-4 py-2 lg:text-sm text-md"
+                  >
                     {renderCell(item, column)}
                   </td>
                 ))}
