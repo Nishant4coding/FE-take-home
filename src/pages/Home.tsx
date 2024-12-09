@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Database, ArrowRight, BarChart2, Users, Search } from "lucide-react";
 import { fetchData } from "../utils/api";
 import { DataRecord } from "../types";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
+  const navigate = useNavigate();
   const [postCount, setPostCount] = useState<number | null>(null);
   const [commentCount, setCommentCount] = useState<number | null>(null);
 
@@ -41,7 +43,7 @@ function Home() {
           way.
         </p>
         <button
-          onClick={() => (window.location.href = "/dashboard")}
+          onClick={() => navigate("/dashboard")}
           className="mt-8 px-10 py-4 text-lg font-bold bg-white text-blue-600 rounded-full shadow-lg hover:bg-gray-100 transform hover:scale-110 transition duration-300"
         >
           Go to Dashboard <ArrowRight className="ml-2 w-5 h-5 inline" />

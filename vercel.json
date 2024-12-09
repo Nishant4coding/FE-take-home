@@ -1,0 +1,7 @@
+{
+  "routes": [
+    { "src": "/dashboard", "dest": "/" },
+    { "src": "/", "dest": "/" },
+    { "src": "/public/(.*)", "dest": "/" }
+  ]
+}
