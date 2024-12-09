@@ -41,11 +41,11 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 via-gray-100 to-gray-200 py-10">
-      <div className="mx-auto px-6 sm:px-8">
-        <div className="bg-white rounded-2xl shadow-2xl p-8 space-y-6">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 via-gray-100 to-gray-200 py-10 px-0">
+      <div className="mx-auto lg:px-6 px-2">
+        <div className="bg-white rounded-2xl shadow-2xl lg:p-8 p-2 space-y-6">
           {/* Header Section */}
-          <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center border-b pb-6 gap-4 lg:gap-0">
+          <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center border-b pb-6 gap-4 lg:gap-0 px-4 lg:px-0">
             <div className="flex lg:flex-row flex-col items-center space-x-3">
               <Database className="w-10 h-10 text-blue-500" />
               <h1 className="lg:text-4xl text-3xl text-center lg:text-left font-extrabold text-gray-800">
