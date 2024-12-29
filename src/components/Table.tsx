@@ -65,7 +65,10 @@ export function Table({
               ))}
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-200 bg-white">
+          <tbody
+            className="divide-y divide-gray-200 bg-white"
+            style={{ maxHeight: "400px", overflowY: "scroll" }}
+          >
             {currentData.map((item, index) => (
               <tr
                 key={index}
